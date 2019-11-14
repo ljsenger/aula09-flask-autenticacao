@@ -1,0 +1,9 @@
+{% macro listaModelos(modelo) %}
+<li class="list-group-item"> {{modelo["nome"]}} </li>
+{% endmacro %}
+
+{% macro listaModelosPromocao(modelo) %}
+{% if modelo["promocao"] %}
+<li class="list-group-item"> {{modelo["nome"]}} </li>
+{% endif %}
+{% endmacro %}

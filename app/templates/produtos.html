@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% import 'macros.html' as macros %}
+
+{% block content %}
+<div class="container">
+<h1> Modelos Disponíveis: </h1>
+<ul class="list-group">
+    {% for x in m: %}
+        {{ macros.listaModelos(m[x])}}
+    {% endfor %}
+</ul>
+</div>
+{% endblock %}
+

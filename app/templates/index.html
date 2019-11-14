@@ -1,0 +1,52 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Página principal{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button " class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+				<span class="sr-only  ">Toggle navigation</span>
+                <span class="icon-bar" style="background-color: blue !important;"> </span>
+					<span class="icon-bar" style="background-color: blue !important;"> </span>
+					<span class="icon-bar" style="background-color: blue !important;"> 	</span>
+			
+            </button>
+            <a class="navbar-brand" href="/">Pegasus</a>
+       </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+				<li><a href="/">Home</a></li>
+				<li><a href={{ url_for('produtos') }}>Produtos</a></li>
+				<li><a href={{ url_for('promocoes') }}>Promocoes</a></li>
+				<li><a href="/">Fale Conosco</a></li>
+				<li>
+                    {% if current_user.is_anonymous %}
+                    <a href="{{ url_for('login') }}">Login</a>
+                    {% else %}
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                     {% endif %}
+				</li>     
+                {% if current_user.is_anonymous %}
+                <li><a href={{ url_for('registro') }}>Registre-se</a></li>                    
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+</nav>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+ </div>
+
+{% endblock %}
