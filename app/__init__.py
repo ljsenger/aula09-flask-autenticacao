@@ -14,6 +14,8 @@ bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
+login.login_view = 'login'
+login.login_message = 'Voce precisa estar logado.'
 
 from app import routes, models
 from .models import Usuario, Funcao

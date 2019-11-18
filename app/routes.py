@@ -42,20 +42,23 @@ def registro():
         
 @app.route("/user/<name>")
 def user(name):
+    u = None
     return render_template("index.html", name=name, u=u)
+
 
 @app.route("/modelos")
 def produtos():
     return render_template("produtos.html", m=modelos)
 
+
 @app.route("/promocoes")
+@login_required
 def promocoes():
     return render_template("promocoes.html", m=modelos)    
 
 @app.route('/favicon.ico')
 def favicon():
     return redirect(url_for('static', filename='favicon.ico'))
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -72,12 +75,13 @@ def login():
             return redirect(url_for('login'))
 
         login_user(usuario, remember=form.lembre_me.data)
-        
-        return redirect(url_for('index'))
+        print(request.args.get("next"))
+        return redirect( request.args.get("next") or url_for('index'))
 
     return render_template('login.html', title='Entrar', form=form)
-@login_required
+
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
